@@ -16,7 +16,7 @@ export const metadata = {
     siteName: 'PixelHitos',
     images: [
       {
-        url: 'https://www.pixelhitos.com/assets/images/MAPA-Graffiti-01.png',
+        url: 'https://www.pixelhitos.com/assets/images/MAPA-version-ILIANA-SFEIR-01.png',
         width: 1200,
         height: 630,
         alt: 'Mapa personalizado - PixelHitos',
