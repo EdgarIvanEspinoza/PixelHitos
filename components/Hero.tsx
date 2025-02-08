@@ -1,8 +1,5 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
-import { Image } from '@heroui/react';
-
 export const Hero = () => {
   return (
     <div
@@ -14,19 +11,13 @@ export const Hero = () => {
         gap: '4rem',
       }}
     >
-      <p>
+      <p
+        className='pixel-text'
+        style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center' }}
+      >
         Regala y decora con tus emociones, lugares, sonidos... con hitos de tu
         historia.
       </p>
-      <Button href='https://instagram.com/pixelhitos' target='_blank'>
-        Encarga tu Hito
-      </Button>
-      <Image
-        src='/assets/images/MAPA-Graffiti-01.png'
-        alt='Hero'
-        width={842}
-        height={595}
-      />
     </div>
   );
 };

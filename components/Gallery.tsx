@@ -93,7 +93,6 @@ export const Gallery = () => {
               shadow='sm'
               src={item.img}
               width='100%'
-              isBlurred
             />
           </CardBody>
           <CardFooter
