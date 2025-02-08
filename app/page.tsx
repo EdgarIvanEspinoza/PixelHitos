@@ -1,16 +1,22 @@
 'use-client';
 
-import Hero from "../components/Hero";
-import Gallery from "../components/Gallery";
-import ContactForm from "../components/ContactForm";
-import Footer from "../components/Footer";
+import { Footer } from '@/components/Footer';
+import { Gallery } from '@/components/Gallery';
+import { Header } from '@/components/Header';
 
 export default function Home() {
   return (
-    <div className="page-container">
-      <Hero />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '0 auto',
+        padding: '2rem',
+        backgroundColor: '#ffde02',
+      }}
+    >
+      <Header />
       <Gallery />
-      <ContactForm />
       <Footer />
     </div>
   );

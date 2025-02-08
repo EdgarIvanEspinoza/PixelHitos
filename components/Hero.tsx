@@ -1,11 +1,32 @@
-"use client"; 
+'use client';
 
-export default function Hero() {
+import { Button } from '@nextui-org/react';
+import { Image } from '@heroui/react';
+
+export const Hero = () => {
   return (
-    <div className="hero">
-      <h1>Transformamos mapas en arte</h1>
-      <p>Tu ciudad, tu historia, convertida en una obra única.</p>
-      <button className="button">Encargar un mapa</button>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '4rem',
+      }}
+    >
+      <p>
+        Regala y decora con tus emociones, lugares, sonidos... con hitos de tu
+        historia.
+      </p>
+      <Button href='https://instagram.com/pixelhitos' target='_blank'>
+        Encarga tu Hito
+      </Button>
+      <Image
+        src='/assets/images/MAPA-Graffiti-01.png'
+        alt='Hero'
+        width={842}
+        height={595}
+      />
     </div>
   );
-}
+};
