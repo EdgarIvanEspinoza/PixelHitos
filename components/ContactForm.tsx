@@ -19,7 +19,7 @@ export default function ContactForm() {
       <h2>Pide tu PixelHito</h2>
       {success && <h3>✅ Mensaje enviado con éxito</h3>}
       <form
-        action='https://formsubmit.co/luissloreto@gmail.com'
+        action='https://formsubmit.co/a5e0ee1a5cccf546f9e654699e64cfd2'
         method='POST'
         onSubmit={() => setSuccess(true)}
         style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
