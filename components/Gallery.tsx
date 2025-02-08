@@ -122,7 +122,7 @@ export const Gallery = () => {
             key={index}
             isPressable
             shadow='sm'
-            onClick={() => {
+            onPress={() => {
               setIsOpen(true);
               setSelected(index);
             }}
@@ -166,6 +166,9 @@ export const Gallery = () => {
           <>
             <ModalHeader className='flex flex-col gap-1'>
               {list[selected].title}
+              <p className='text-default-500 text-small'>
+                {list[selected].price}
+              </p>
             </ModalHeader>
             <ModalBody>
               <Image
