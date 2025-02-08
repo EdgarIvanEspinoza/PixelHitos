@@ -66,7 +66,8 @@ export const Gallery = () => {
       style={{
         display: 'grid',
         gap: '0.5rem',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(X, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        width: '100%',
         maxWidth: '800px',
         margin: '0 auto',
         padding: '1rem',
@@ -92,7 +93,6 @@ export const Gallery = () => {
               shadow='sm'
               src={item.img}
               width='100%'
-              isZoomed
               isBlurred
             />
           </CardBody>
