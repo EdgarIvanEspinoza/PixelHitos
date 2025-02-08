@@ -5,59 +5,59 @@ import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 export const Gallery = () => {
   const list = [
     {
-      title: 'Orange',
+      title: 'ALEIRAM',
       img: '/assets/images/ALEIRAM-cancion-01.png',
-      price: '$5.50',
+      price: 'sold-out',
     },
     {
-      title: 'Tangerine',
-      img: '/assets/images/ILIANA-SFEIR-audio-01.png',
-      price: '$3.00',
+      title: 'RECREO',
+      img: '/assets/images/MAPA-version-RECREO.png',
+      price: 'sold-out',
     },
     {
-      title: 'Raspberry',
-      img: '/assets/images/JAL.png',
-      price: '$10.00',
-    },
-    {
-      title: 'Lemon',
-      img: '/assets/images/MAPA-01.png',
-      price: '$5.30',
-    },
-    {
-      title: 'Avocado',
+      title: 'AVOCADO',
       img: '/assets/images/MAPA-Graffiti-01.png',
-      price: '$15.70',
+      price: '€10.00',
     },
     {
-      title: 'Lemon 2',
+      title: 'Prospe 02',
       img: '/assets/images/MAPA-Prosperidad-01.png',
-      price: '$8.00',
+      price: '€10.00',
     },
     {
-      title: 'Banana',
+      title: 'Prospe 01',
       img: '/assets/images/MAPA-Prosperidad-02.png',
-      price: '$7.50',
+      price: 'sold-out',
     },
     {
-      title: 'Watermelon',
+      title: 'PROSPE',
       img: '/assets/images/MAPA-Prosperidad-MDF25.png',
       price: 'sold-out',
     },
     {
-      title: 'Watermelon',
+      title: 'GIMENA',
       img: '/assets/images/MAPA-version-GIMENA.png',
-      price: '$12.20',
+      price: '€10.00',
     },
     {
-      title: 'Watermelon',
-      img: '/assets/images/MAPA-version-ILIANA-SFEIR-01.png',
-      price: '$12.20',
-    },
-    {
-      title: 'Watermelon',
-      img: '/assets/images/MAPA-version-RECREO.png',
+      title: 'ILIANA-SFEIR',
+      img: '/assets/images/ILIANA-SFEIR-audio-01.png',
       price: 'sold-out',
+    },
+    {
+      title: 'JAL',
+      img: '/assets/images/JAL.png',
+      price: '€10.00',
+    },
+    {
+      title: 'HOME',
+      img: '/assets/images/MAPA-01.png',
+      price: '€10.00',
+    },
+    {
+      title: 'ILIANA-SFEIR',
+      img: '/assets/images/MAPA-version-ILIANA-SFEIR-01.png',
+      price: '€10.00',
     },
   ];
 
@@ -66,7 +66,10 @@ export const Gallery = () => {
       style={{
         display: 'grid',
         gap: '0.5rem',
-        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(X, 1fr))',
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '1rem',
       }}
     >
       {list.map((item, index) => (
@@ -76,17 +79,31 @@ export const Gallery = () => {
           shadow='sm'
           onPress={() => console.log('item pressed')}
         >
-          <CardBody className='overflow-visible p-0'>
+          <CardBody
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <Image
               alt={item.title}
-              className='w-full object-cover h-[140px]'
               radius='lg'
               shadow='sm'
               src={item.img}
-              width='50%'
+              width='100%'
+              isZoomed
+              isBlurred
             />
           </CardBody>
-          <CardFooter className='text-small justify-between'>
+          <CardFooter
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              fontSize: '0.9rem',
+            }}
+          >
             <b>{item.title}</b>
             <p className='text-default-500'>{item.price}</p>
           </CardFooter>

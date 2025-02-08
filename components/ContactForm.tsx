@@ -4,68 +4,41 @@ import { useState } from 'react';
 import { Input, Textarea, Button, Card } from '@nextui-org/react';
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      setSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
-    }
-
-    setLoading(false);
-  };
-
   return (
-    <Card>
-      <h2>Contacto</h2>
-      {success && <h3 color='success'>✅ Mensaje enviado con éxito</h3>}
-      <form onSubmit={handleSubmit}>
-        <Input
-          name='name'
-          label='Nombre'
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+    <Card
+      style={{
+        maxWidth: '800px',
+        width: '100%',
+        margin: '0 auto',
+        padding: '2rem',
+        gap: '1rem',
+      }}
+    >
+      <h2>Pide tu PixelHito</h2>
+      {success && <h3>✅ Mensaje enviado con éxito</h3>}
+      <form
+        action='https://formsubmit.co/5e941637ab0ae560f4552df9028c5b1d'
+        method='POST'
+        onSubmit={() => setSuccess(true)}
+        style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+      >
+        <Input name='name' label='Nombre' placeholder='Tu nombre' required />
         <Input
           name='email'
           type='email'
           label='Email'
-          value={formData.email}
-          onChange={handleChange}
+          placeholder='Tu correo electrónico'
           required
         />
         <Textarea
           name='message'
           label='Mensaje'
-          value={formData.message}
-          onChange={handleChange}
+          placeholder='Escribe tu mensaje aquí'
           required
         />
-        <Button type='submit' disabled={loading}>
-          {loading ? 'Enviando...' : 'Enviar Mensaje'}
-        </Button>
+        <Button type='submit'>Enviar Mensaje</Button>
       </form>
     </Card>
   );
