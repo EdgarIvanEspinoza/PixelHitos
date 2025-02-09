@@ -2,6 +2,7 @@
 
 import './globals.css';
 import Providers from './providers';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'PixelHitos - Tu historia en mapas personalizados',
@@ -31,9 +32,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='es'>
+    <html lang="es">
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );
