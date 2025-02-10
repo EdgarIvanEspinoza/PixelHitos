@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Header = () => {
   return (
@@ -13,7 +14,15 @@ export const Header = () => {
         justifyContent: 'center',
       }}
     >
-      <Image src='/assets/logo.svg' alt='Logo' width={80} height={80} />
+      <Link href="/">
+        <Image
+          src="/assets/logo.svg"
+          alt="Logo"
+          width={80}
+          height={80}
+          style={{ cursor: 'pointer' }}
+        />
+      </Link>
     </div>
   );
 };

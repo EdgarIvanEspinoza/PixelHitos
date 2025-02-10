@@ -1,16 +1,35 @@
 'use client';
 
-import { useState } from 'react';
-import Script from 'next/script'; // Para cargar el script de reCAPTCHA
-import { Input, Textarea, Button, Card } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import Script from 'next/script';
+import {
+  Input,
+  Textarea,
+  Button,
+  Card,
+  Checkbox,
+  Link,
+} from '@nextui-org/react';
 
 export default function ContactForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isCheckedTC, setIsCheckedTC] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
+
+  const isFormInvalid = loading || !isCheckedTC;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setResponseMessage('');
+
+    if (!isCheckedTC) {
+      setResponseMessage(
+        'Debes aceptar la política de privacidad para continuar.'
+      );
+      return;
+    }
 
     const token = (
       document.getElementById('g-recaptcha-response') as HTMLInputElement
@@ -42,11 +61,23 @@ export default function ContactForm() {
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (error) {
+      setResponseMessage('❌ Por favor, verifica el CAPTCHA');
+    }
+
+    if (success) {
+      setResponseMessage(
+        '✅ ¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.'
+      );
+    }
+  }, [error, success]);
+
   return (
     <>
       <Script
-        src='https://www.google.com/recaptcha/api.js'
-        strategy='lazyOnload'
+        src="https://www.google.com/recaptcha/api.js"
+        strategy="lazyOnload"
       />
 
       <Card
@@ -60,51 +91,59 @@ export default function ContactForm() {
       >
         <h2>Pide tu PixelHito</h2>
         <form
-          action='https://formsubmit.co/a5e0ee1a5cccf546f9e654699e64cfd2'
-          method='POST'
+          action="https://formsubmit.co/a5e0ee1a5cccf546f9e654699e64cfd2"
+          method="POST"
           onSubmit={handleSubmit}
           style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
         >
           <Input
-            name='name'
-            label='Nombre'
-            placeholder='Tu nombre'
+            name="name"
+            label="Nombre"
+            placeholder="Tu nombre"
             required
             disabled={loading}
+            errorMessage="Por favor, escribe tu nombre"
           />
           <Input
-            name='email'
-            type='email'
-            label='Email'
-            placeholder='Tu correo electrónico'
+            name="email"
+            type="email"
+            label="Email"
+            placeholder="Tu correo electrónico"
             required
             disabled={loading}
+            errorMessage="Por favor, escribe tu correo electrónico"
           />
           <Textarea
-            name='message'
-            label='Mensaje'
-            placeholder='Escribe tu mensaje aquí'
+            name="message"
+            label="Mensaje"
+            placeholder="Escribe tu mensaje aquí"
             required
             disabled={loading}
+            errorMessage="Por favor, escribe tu mensaje"
           />
-
+          <div style={{ display: 'flex', gap: '0.2rem' }}>
+            <Checkbox
+              name="terms"
+              isSelected={isCheckedTC}
+              onValueChange={() => setIsCheckedTC(!isCheckedTC)}
+              disabled={loading}
+            ></Checkbox>
+            <>
+              He leído y acepto la{' '}
+              <Link isExternal href="/terminos-y-condiciones">
+                política de privacidad
+              </Link>
+            </>
+          </div>
           <div
-            className='g-recaptcha'
+            className="g-recaptcha"
             data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             style={{ margin: '0 auto' }}
           ></div>
-
-          {error && (
-            <p style={{ color: 'red', margin: '0 auto' }}>
-              ❌ Por favor, verifica el CAPTCHA
-            </p>
+          {responseMessage && (
+            <div style={{ margin: '0 auto' }}>{responseMessage}</div>
           )}
-          {success && (
-            <h3 style={{ color: 'green', margin: '0 auto' }}>
-              ✅ Mensaje enviado con éxito
-            </h3>
-          )}
-          <Button type='submit' isLoading={loading}>
+          <Button type="submit" isDisabled={isFormInvalid} isLoading={loading}>
             Enviar Mensaje
           </Button>
         </form>

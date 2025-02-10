@@ -1,8 +1,10 @@
 'use-client';
 
+import { Footer } from '@/components/Footer';
 import './globals.css';
 import Providers from './providers';
 import { Analytics } from '@vercel/analytics/next';
+import { Header } from '@/components/Header';
 
 export const metadata = {
   title: 'PixelHitos - Tu historia en mapas personalizados',
@@ -35,7 +37,19 @@ export default function RootLayout({
     <html lang="es">
       <body>
         <Providers>
-          {children}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '0 auto',
+              gap: '2rem',
+              backgroundColor: '#ffde02',
+            }}
+          >
+            <Header />
+            {children}
+            <Footer />
+          </div>
           <Analytics />
         </Providers>
       </body>
