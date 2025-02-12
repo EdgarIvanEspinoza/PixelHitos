@@ -2,14 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
-import {
-  Input,
-  Textarea,
-  Button,
-  Card,
-  Checkbox,
-  Link,
-} from '@nextui-org/react';
+import { Input, Textarea, Button, Card, Checkbox, Link } from '@heroui/react';
 
 export default function ContactForm() {
   const [success, setSuccess] = useState(false);

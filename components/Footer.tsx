@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@nextui-org/react';
+import { Link } from '@heroui/react';
 
 export const Footer = () => {
   return (
@@ -14,7 +14,7 @@ export const Footer = () => {
         }}
       >
         © 2025 Pixelhitos | Síguenos en{' '}
-        <Link href='https://instagram.com/pixelhitos'>Instagram</Link>
+        <Link href="https://instagram.com/pixelhitos">Instagram</Link>
       </h1>
     </>
   );

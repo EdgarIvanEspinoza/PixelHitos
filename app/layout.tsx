@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className="light">
       <body>
         <Providers>
           <div
@@ -50,7 +50,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
-          <Analytics />
+          {process.env.NODE_ENV === 'production' && <Analytics />}
         </Providers>
       </body>
     </html>
