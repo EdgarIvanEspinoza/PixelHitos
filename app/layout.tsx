@@ -37,15 +37,7 @@ export default function RootLayout({
     <html lang="es" className="light">
       <body>
         <Providers>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              margin: '0 auto',
-              gap: '2rem',
-              backgroundColor: '#ffde02',
-            }}
-          >
+          <div className="flex flex-col mx-auto gap-8 bg-[#ffde02]">
             <Header />
             {children}
             <Footer />

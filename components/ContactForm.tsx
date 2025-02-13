@@ -73,21 +73,13 @@ export default function ContactForm() {
         strategy="lazyOnload"
       />
 
-      <Card
-        style={{
-          maxWidth: '800px',
-          width: '100%',
-          margin: '0 auto',
-          padding: '2rem',
-          gap: '1rem',
-        }}
-      >
+      <Card className="max-w-[800px] w-full mx-auto p-8 gap-4">
         <h2>Pide tu PixelHito</h2>
         <form
           action="https://formsubmit.co/a5e0ee1a5cccf546f9e654699e64cfd2"
           method="POST"
           onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          className="flex flex-col gap-4"
         >
           <Input
             name="name"
@@ -114,7 +106,7 @@ export default function ContactForm() {
             disabled={loading}
             errorMessage="Por favor, escribe tu mensaje"
           />
-          <div style={{ display: 'flex', gap: '0.2rem' }}>
+          <div className="flex gap-1">
             <Checkbox
               name="terms"
               isSelected={isCheckedTC}
@@ -129,13 +121,10 @@ export default function ContactForm() {
             </>
           </div>
           <div
-            className="g-recaptcha"
+            className="g-recaptcha mx-auto"
             data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            style={{ margin: '0 auto' }}
           ></div>
-          {responseMessage && (
-            <div style={{ margin: '0 auto' }}>{responseMessage}</div>
-          )}
+          {responseMessage && <div className="mx-auto">{responseMessage}</div>}
           <Button type="submit" isDisabled={isFormInvalid} isLoading={loading}>
             Enviar Mensaje
           </Button>

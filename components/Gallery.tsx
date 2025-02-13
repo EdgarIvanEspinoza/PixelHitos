@@ -19,59 +19,64 @@ export const Gallery = () => {
   const [selected, setSelected] = useState(0);
   const list = [
     {
-      title: 'ALEIRAM',
+      title: 'El primer baile',
       img: '/assets/images/ALEIRAM-cancion-01.png',
       price: 'sold-out',
     },
     {
-      title: 'RECREO',
+      title: 'El Recreo',
       img: '/assets/images/MAPA-version-RECREO.png',
       price: 'sold-out',
     },
     {
-      title: 'AVOCADO',
+      title: `Grafitea'o`,
       img: '/assets/images/MAPA-Graffiti-01.png',
       price: '€10.00',
     },
     {
-      title: 'Prospe 02',
+      title: 'La Prospe 02',
       img: '/assets/images/MAPA-Prosperidad-01.png',
       price: '€10.00',
     },
     {
-      title: 'Prospe 01',
+      title: 'La Prospe 01',
       img: '/assets/images/MAPA-Prosperidad-02.png',
       price: 'sold-out',
     },
     {
-      title: 'PROSPE',
+      title: 'Madrid Design Festival 2025 Prospe',
       img: '/assets/images/MAPA-Prosperidad-MDF25.png',
       price: 'sold-out',
     },
     {
-      title: 'GIMENA',
+      title: 'My Streets',
       img: '/assets/images/MAPA-version-GIMENA.png',
       price: '€10.00',
     },
     {
-      title: 'ILIANA-SFEIR',
+      title: 'Las primeras palabras de JuanDi',
       img: '/assets/images/ILIANA-SFEIR-audio-01.png',
       price: 'sold-out',
     },
     {
-      title: 'JAL',
+      title: 'Aqui, allá y acullá',
       img: '/assets/images/JAL.png',
       price: '€10.00',
     },
     {
-      title: 'HOME',
+      title: 'Home',
       img: '/assets/images/MAPA-01.png',
       price: '€10.00',
     },
     {
-      title: 'ILIANA-SFEIR',
+      title: 'El favorito de Ily',
       img: '/assets/images/MAPA-version-ILIANA-SFEIR-01.png',
       price: '€10.00',
+    },
+    {
+      title: 'Where it all began',
+      img: `https://placehold.co/850x1134?text=Coming%5CnSoon`,
+      price: 'coming soon',
     },
   ];
 
@@ -106,52 +111,31 @@ export const Gallery = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'grid',
-          gap: '0.5rem',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-          width: '100%',
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '1rem',
-        }}
-      >
+      <div className="grid gap-2 grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] w-full max-w-[800px] mx-auto p-4">
         {list.map((item, index) => (
           <Card
             key={index}
             isPressable
-            shadow='sm'
+            shadow="sm"
             onPress={() => {
               setIsOpen(true);
               setSelected(index);
             }}
           >
-            <CardBody
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            <CardBody className="flex justify-center items-center">
               <Image
                 alt={item.title}
-                radius='lg'
-                shadow='sm'
+                radius="lg"
+                shadow="sm"
                 src={item.img}
-                width='100%'
+                width="100%"
               />
             </CardBody>
-            <CardFooter
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                fontSize: '0.9rem',
-              }}
-            >
+            <CardFooter className="flex justify-between items-end text-sm">
               <b>{item.title}</b>
-              <p className='text-default-500'>{item.price}</p>
+              <div className=" min-w-[80px] text-right mr-2">
+                <p className="text-default-500">{item.price}</p>
+              </div>
             </CardFooter>
           </Card>
         ))}
@@ -164,40 +148,40 @@ export const Gallery = () => {
       >
         <ModalContent>
           <>
-            <ModalHeader className='flex flex-col gap-1'>
+            <ModalHeader className="flex flex-col gap-1">
               {list[selected].title}
-              <p className='text-default-500 text-small'>
+              <p className="text-default-500 text-small">
                 {list[selected].price}
               </p>
             </ModalHeader>
             <ModalBody>
               <Image
                 alt={list[selected].title}
-                radius='lg'
-                shadow='sm'
+                radius="lg"
+                shadow="sm"
                 src={list[selected].img}
-                width='100%'
+                width="100%"
               />
             </ModalBody>
-            <ModalFooter className='flex justify-between'>
+            <ModalFooter className="flex justify-between">
               {selected === 0 ? null : (
-                <Button color='warning' variant='light' onPress={goLeft}>
+                <Button color="warning" variant="light" onPress={goLeft}>
                   <Image
-                    alt='Left arrow'
-                    src='/assets/icons/arrowBigLeft.svg'
+                    alt="Left arrow"
+                    src="/assets/icons/arrowBigLeft.svg"
                   />
                 </Button>
               )}
               {selected === list.length - 1 ? null : (
                 <Button
-                  color='warning'
-                  variant='light'
+                  color="warning"
+                  variant="light"
                   onPress={goRight}
-                  style={{ marginLeft: 'auto' }}
+                  className="ml-auto"
                 >
                   <Image
-                    alt='Right arrow'
-                    src='/assets/icons/arrowBigRight.svg'
+                    alt="Right arrow"
+                    src="/assets/icons/arrowBigRight.svg"
                   />
                 </Button>
               )}
