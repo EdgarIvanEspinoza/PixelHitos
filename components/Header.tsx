@@ -5,22 +5,14 @@ import Link from 'next/link';
 
 export const Header = () => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        padding: '1rem',
-        backgroundColor: '#fff',
-        alignContent: 'center',
-        justifyContent: 'center',
-      }}
-    >
+    <div className="flex p-4 bg-white content-center justify-center">
       <Link href="/">
         <Image
           src="/assets/logo.svg"
           alt="Logo"
           width={80}
           height={80}
-          style={{ cursor: 'pointer' }}
+          className="cursor-pointer"
         />
       </Link>
     </div>
