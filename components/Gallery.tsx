@@ -30,7 +30,7 @@ export const Gallery = () => {
     },
     {
       title: `Grafitea'o`,
-      img: '/assets/images/MAPA-Graffiti-01.png',
+      img: '/assets/images/grafiteao.png',
       price: '€10.00',
     },
     {
