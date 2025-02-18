@@ -69,6 +69,16 @@ export const Gallery = () => {
       price: '€10.00',
     },
     {
+      title: 'Prudente',
+      img: '/assets/images/Prudente.png',
+      price: '€10.00',
+    },
+    {
+      title: 'Alcantarilla - Alcala',
+      img: '/assets/images/Alcantacala.png',
+      price: '€10.00',
+    },
+    {
       title: 'El favorito de Ily',
       img: '/assets/images/MAPA-version-ILIANA-SFEIR-01.png',
       price: '€10.00',
