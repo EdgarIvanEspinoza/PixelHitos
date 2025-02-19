@@ -31,7 +31,7 @@ export const ItemModal = ({
 }) => {
   return (
     <>
-      {Loading && list && (
+      {!Loading && list && (
         <Modal
           backdrop={'blur'}
           isOpen={isOpen}
