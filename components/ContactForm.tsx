@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Script from 'next/script';
 import { Input, Textarea, Button, Card, Checkbox, Link } from '@heroui/react';
+import { useSendEmail } from '../hooks/useSendEmail';
 
-export default function ContactForm() {
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [isCheckedTC, setIsCheckedTC] = useState(false);
+export const ContactForm = () => {
   const [responseMessage, setResponseMessage] = useState('');
+  const [isCheckedTC, setIsCheckedTC] = useState(false);
+  const { sendEmail, loading, error, success } = useSendEmail();
 
   const isFormInvalid = loading || !isCheckedTC;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setResponseMessage('');
 
@@ -27,44 +26,31 @@ export default function ContactForm() {
     const token = (
       document.getElementById('g-recaptcha-response') as HTMLInputElement
     )?.value;
-
     if (!token) {
-      setError(true);
+      setResponseMessage('❌ Verifica el CAPTCHA');
       return;
     }
 
-    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      message: formData.get('message') as string,
+      token,
+    };
 
-    const recaptchaResponse = await fetch('/api/validate-recaptcha', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
-    });
-
-    const recaptchaResult = await recaptchaResponse.json();
-
-    if (recaptchaResponse.ok) {
-      setError(false);
-      setSuccess(true);
-    } else {
-      console.error('reCAPTCHA failed:', recaptchaResult.errors);
-      setError(true);
-    }
-
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (error) {
-      setResponseMessage('❌ Por favor, verifica el CAPTCHA');
-    }
-
-    if (success) {
+    const result = await sendEmail(data);
+    if (result) {
       setResponseMessage(
         '✅ ¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.'
       );
+    } else {
+      console.log(error);
+      setResponseMessage(
+        `❌ ${error || 'Hubo un error al enviar el mensaje.'}`
+      );
     }
-  }, [error, success]);
+  };
 
   return (
     <>
@@ -75,18 +61,13 @@ export default function ContactForm() {
 
       <Card className="max-w-[800px] w-full mx-auto p-8 gap-4">
         <h2>Pide tu PixelHito</h2>
-        <form
-          action="https://formsubmit.co/a5e0ee1a5cccf546f9e654699e64cfd2"
-          method="POST"
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-4"
-        >
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Input
             name="name"
             label="Nombre"
             placeholder="Tu nombre"
             required
-            disabled={loading}
+            disabled={loading || success}
             errorMessage="Por favor, escribe tu nombre"
           />
           <Input
@@ -95,7 +76,7 @@ export default function ContactForm() {
             label="Email"
             placeholder="Tu correo electrónico"
             required
-            disabled={loading}
+            disabled={loading || success}
             errorMessage="Por favor, escribe tu correo electrónico"
           />
           <Textarea
@@ -103,7 +84,7 @@ export default function ContactForm() {
             label="Mensaje"
             placeholder="Escribe tu mensaje aquí"
             required
-            disabled={loading}
+            disabled={loading || success}
             errorMessage="Por favor, escribe tu mensaje"
           />
           <div className="flex gap-1">
@@ -111,8 +92,8 @@ export default function ContactForm() {
               name="terms"
               isSelected={isCheckedTC}
               onValueChange={() => setIsCheckedTC(!isCheckedTC)}
-              disabled={loading}
-            ></Checkbox>
+              disabled={loading || success}
+            />
             <>
               He leído y acepto la{' '}
               <Link isExternal href="/terminos-y-condiciones">
@@ -132,4 +113,4 @@ export default function ContactForm() {
       </Card>
     </>
   );
-}
+};

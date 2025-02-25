@@ -1,37 +1,38 @@
+import { useGetImages } from '@/hooks/useGetImages';
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
   Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
 } from '@heroui/react';
 
-export const ItemModal = ({
-  isOpen,
-  setIsOpen,
-  list,
-  Loading,
-  selected,
-  goLeft,
-  goRight,
-}: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-  list?: {
-    title: string;
-    price: string;
-    img: string;
-  }[];
-  Loading: boolean;
-  selected: number;
+type Props = {
   goLeft: () => void;
   goRight: () => void;
-}) => {
+  isOpen: boolean;
+  selectedItemIndex: string;
+  setIsOpen: (isOpen: boolean) => void;
+};
+
+export const ItemModal = ({
+  goLeft,
+  goRight,
+  isOpen,
+  selectedItemIndex,
+  setIsOpen,
+}: Props) => {
+  console.log(selectedItemIndex);
+  const { data, isLoading } = useGetImages({
+    id: selectedItemIndex,
+  });
+  console.log(data);
+
   return (
     <>
-      {!Loading && list && (
+      {!isLoading && (
         <Modal
           backdrop={'blur'}
           isOpen={isOpen}
@@ -41,22 +42,20 @@ export const ItemModal = ({
           <ModalContent>
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {list[selected]?.title}
-                <p className="text-default-500 text-small">
-                  {list[selected]?.price}
-                </p>
+                {data?.title}
+                <p className="text-default-500 text-small">{data?.price}</p>
               </ModalHeader>
               <ModalBody>
                 <Image
-                  alt={list[selected]?.title}
+                  alt={data?.title}
                   radius="lg"
                   shadow="sm"
-                  src={list[selected]?.img}
+                  src={data?.img}
                   width="100%"
                 />
               </ModalBody>
               <ModalFooter className="flex justify-between">
-                {selected === 0 ? null : (
+                {goLeft !== null && (
                   <Button color="warning" variant="light" onPress={goLeft}>
                     <Image
                       alt="Left arrow"
@@ -64,7 +63,7 @@ export const ItemModal = ({
                     />
                   </Button>
                 )}
-                {selected === list.length - 1 ? null : (
+                {goRight !== null && (
                   <Button
                     color="warning"
                     variant="light"

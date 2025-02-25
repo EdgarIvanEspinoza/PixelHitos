@@ -5,14 +5,9 @@ import { Card, CardBody, CardFooter, Image } from '@heroui/react';
 import { ItemModal } from './ItemModal';
 import useSWR from 'swr';
 import { SkeletonComponent } from './Skeleton';
+import { Item } from '@/types/interface';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-interface Item {
-  title: string;
-  price: string;
-  img: string;
-}
 
 export const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,9 +85,7 @@ export const Gallery = () => {
       <ItemModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        list={list}
-        Loading={isLoading}
-        selected={selected}
+        selectedItemIndex={list[selected]?.id}
         goLeft={goLeft}
         goRight={goRight}
       />
