@@ -18,13 +18,12 @@ export const useSendEmail = () => {
     setSuccess(false);
 
     try {
-      console.log(data.token);
       const recaptchaRes = await fetch('/api/validate-recaptcha', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: data.token }),
       });
-      const recaptchaResult = await recaptchaRes.json();
+      await recaptchaRes.json();
       if (!recaptchaRes.ok) {
         throw new Error('Error de validación reCAPTCHA');
       }

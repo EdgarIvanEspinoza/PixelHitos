@@ -45,7 +45,6 @@ export const ContactForm = () => {
         '✅ ¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.'
       );
     } else {
-      console.log(error);
       setResponseMessage(
         `❌ ${error || 'Hubo un error al enviar el mensaje.'}`
       );

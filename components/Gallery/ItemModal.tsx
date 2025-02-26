@@ -24,11 +24,9 @@ export const ItemModal = ({
   selectedItemIndex,
   setIsOpen,
 }: Props) => {
-  console.log(selectedItemIndex);
   const { data, isLoading } = useGetImages({
     id: selectedItemIndex,
   });
-  console.log(data);
 
   return (
     <>
